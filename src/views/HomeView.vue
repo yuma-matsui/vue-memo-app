@@ -1,18 +1,36 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <h1>
+    <router-link
+      to="/"
+    >
+      Memo App
+    </router-link>
+  </h1>
+  <h2>{{ subTitle }}</h2>
+  <memo-create-form />
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapGetters } from 'vuex'
+import MemoCreateForm from '@/components/MemoCreateForm'
 
 export default {
-  name: 'HomeView',
   components: {
-    HelloWorld
+    MemoCreateForm
+  },
+
+  computed: {
+    ...mapGetters([
+      'subTitle'
+    ])
   }
 }
 </script>
+
+<style scoped>
+h1 a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+</style>
