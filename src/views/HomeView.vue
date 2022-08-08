@@ -1,22 +1,21 @@
 <template>
-  <h1>
-    <router-link
-      to="/"
-    >
-      Memo App
-    </router-link>
-  </h1>
+  <memo-app-top-title />
   <h2>{{ subTitle }}</h2>
+  <memo-lists />
   <memo-create-form />
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import MemoCreateForm from '@/components/MemoCreateForm'
+import MemoLists from '@/components/MemoLists'
+import MemoAppTopTitle from '@/components/MemoAppTopTitle'
 
 export default {
   components: {
-    MemoCreateForm
+    MemoCreateForm,
+    MemoLists,
+    MemoAppTopTitle
   },
 
   computed: {
@@ -26,11 +25,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-h1 a {
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-}
-</style>
