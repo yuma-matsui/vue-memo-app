@@ -30,11 +30,28 @@ export default createStore({
       localStorage.clear()
       const memosJSON = JSON.stringify(state.memos)
       localStorage.setItem('memos', memosJSON)
+    },
+
+    editMemo (state, index) {
+      state.memos.at(index).editable = true
+    },
+
+    deleteMemo (state, index) {
+      state.memos.splice(index, 1)
     }
   },
   actions: {
     createMemo ({ commit }, newMemo) {
       commit('createMemo', newMemo)
+      commit('saveMemos')
+    },
+
+    editMemo ({ commit }, index) {
+      commit('editMemo', index)
+    },
+
+    deleteMemo ({ commit }, index) {
+      commit('deleteMemo', index)
       commit('saveMemos')
     }
   }
