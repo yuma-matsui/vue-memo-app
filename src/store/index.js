@@ -23,6 +23,8 @@ export default createStore({
   },
   mutations: {
     createMemo (state, newMemo) {
+      if (newMemo.title === '') newMemo.title = 'タイトルなし'
+      if (newMemo.description === '') newMemo.description = '詳細なし'
       state.memos.push(newMemo)
     },
 

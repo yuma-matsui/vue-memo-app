@@ -1,6 +1,6 @@
 <template>
-  <div class="memo-lists-container">
-    <template v-if="hasMemos">
+  <template v-if="hasMemos">
+    <div class="memo-lists-container">
       <ul>
         <li
           v-for="(memo, index) in memos"
@@ -11,8 +11,8 @@
           </router-link>
         </li>
       </ul>
-    </template>
-  </div>
+    </div>
+  </template>
 </template>
 
 <script>
