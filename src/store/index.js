@@ -5,14 +5,20 @@ export default createStore({
     memos: JSON.parse(localStorage.getItem('memos')) || []
   },
   getters: {
-    existMemos (state) {
+    hasMemos (state) {
       return state.memos.length > 0
     },
 
     subTitle (_, getters) {
-      return getters.existMemos
+      return getters.hasMemos
         ? 'Check your memos below.'
         : "Let's write your memos."
+    },
+
+    memo (state) {
+      return (index) => {
+        return state.memos.at(index)
+      }
     }
   },
   mutations: {

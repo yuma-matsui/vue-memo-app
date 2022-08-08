@@ -7,6 +7,14 @@ const routes = [
     component:
       () =>
         import(/* webpackChunkName: 'Home' */ '@/views/HomeView')
+  },
+  {
+    path: '/memos/:index',
+    name: 'MemoDetails',
+    component:
+      () =>
+        import(/* webpackChunkName: 'MemoDetails' */ '@/views/MemoDetails'),
+    props: true
   }
 ]
 
