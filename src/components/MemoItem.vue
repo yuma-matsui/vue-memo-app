@@ -43,7 +43,7 @@ export default {
 
   unmounted () {
     const memo = this.$store.getters.memo(this.index)
-    if (memo.editable) this.$store.dispatch('editMemo', this.index)
+    if (memo?.editable) this.$store.dispatch('editMemo', this.index)
   }
 }
 </script>
