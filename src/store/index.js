@@ -9,6 +9,12 @@ export default createStore({
       return state.memos.length > 0
     },
 
+    hasMemo (state) {
+      return (index) => {
+        return state.memos.length > index
+      }
+    },
+
     subTitle (_, getters) {
       return getters.hasMemos
         ? 'Check your memos below.'

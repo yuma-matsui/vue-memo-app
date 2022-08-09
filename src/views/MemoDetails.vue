@@ -1,6 +1,6 @@
 <template>
   <memo-app-top-title />
-  <template v-if="hasMemos">
+  <template v-if="hasMemo(index)">
     <memo-item
       :index="index"
     />
@@ -27,8 +27,17 @@ export default {
 
   computed: {
     ...mapGetters([
-      'hasMemos'
+      'hasMemo'
     ])
+  },
+
+  mounted () {
+    if (!this.$store.getters.hasMemo(this.index)) this.$router.push('/')
+  },
+
+  unmounted () {
+    const memo = this.$store.getters.memo(this.index)
+    if (memo?.editable) this.$store.dispatch('editMemo', this.index)
   }
 }
 </script>
