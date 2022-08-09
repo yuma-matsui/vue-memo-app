@@ -1,6 +1,6 @@
 <template>
   <button
-  class="button"
+  class="memo-button"
   @click="deleteMemo"
   >
     削除

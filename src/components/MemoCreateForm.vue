@@ -20,7 +20,7 @@
         ></textarea>
       </div>
       <input
-        type="submit"
+        class="memo-input"
         value="作成"
         @click="createMemo"
       >
@@ -62,7 +62,9 @@ h2 {
 .create-form-wrapper {
   margin: 50px auto;
 }
+</style>
 
+<style>
 .input-container {
   margin: 10px 0px;
   display: flex;
@@ -87,7 +89,9 @@ h2 {
   border-radius: 3px;
 }
 
-input[type="submit"] {
+.memo-input {
+  width: 50px;
+  text-align: center;
   display: inline-block;
   border: solid 1px black;
   border-radius: 5px;

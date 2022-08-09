@@ -1,7 +1,7 @@
 <template>
   <button
     @click="editMemo(index)"
-    class="button"
+    class="memo-button"
   >
     編集
   </button>
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style>
-.button {
+.memo-button {
   display: inline-block;
   border: solid 1px black;
   border-radius: 5px;
