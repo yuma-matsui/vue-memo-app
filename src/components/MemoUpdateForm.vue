@@ -6,7 +6,7 @@
         type="text"
         id="title"
         placeholder="Input the title of this memo"
-        v-model="updatedMemo.title"
+        v-model.trim="updatedMemo.title"
       >
     </div>
     <div class="input-container">
@@ -14,7 +14,7 @@
       <textarea
         id="description"
         placeholder="Input the description of this memo"
-        v-model="updatedMemo.description"
+        v-model.trim="updatedMemo.description"
       ></textarea>
     </div>
     <input

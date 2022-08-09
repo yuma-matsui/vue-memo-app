@@ -41,6 +41,8 @@ export default createStore({
 
     updateMemo (state, { index, updatedMemo }) {
       updatedMemo.editable = false
+      if (updatedMemo.title === '') updatedMemo.title = 'タイトルなし'
+      if (updatedMemo.description === '') updatedMemo.description = '詳細なし'
       state.memos[index] = updatedMemo
     },
 
