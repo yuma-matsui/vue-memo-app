@@ -1,21 +1,31 @@
 <template>
-  <div class="memo-item-container">
-    <h2>{{ memo.title }}</h2>
-    <p>{{ memo.description }}</p>
-  </div>
-  <div class="button-container">
-    <memo-edit-button :index="index" />
-    <memo-delete-button :index="index" />
-  </div>
+  <template v-if="memo.editable">
+    <memo-update-form
+      :memo="memo"
+      :index="index"
+    />
+  </template>
+  <template v-else>
+    <div class="memo-item-container">
+      <h2>{{ memo.title }}</h2>
+      <p>{{ memo.description }}</p>
+    </div>
+    <div class="button-container">
+      <memo-edit-button :index="index" />
+      <memo-delete-button :index="index" />
+    </div>
+  </template>
 </template>
 
 <script>
 import MemoEditButton from '@/components/MemoEditButton'
 import MemoDeleteButton from '@/components/MemoDeleteButton'
+import MemoUpdateForm from '@/components/MemoUpdateForm'
 export default {
   components: {
     MemoEditButton,
-    MemoDeleteButton
+    MemoDeleteButton,
+    MemoUpdateForm
   },
 
   props: {
@@ -29,6 +39,11 @@ export default {
     memo () {
       return this.$store.getters.memo(this.index)
     }
+  },
+
+  unmounted () {
+    const memo = this.$store.getters.memo(this.index)
+    if (memo.editable) this.$store.dispatch('editMemo', this.index)
   }
 }
 </script>
@@ -51,7 +66,7 @@ p {
   overflow-wrap: break-word;
 }
 
-.button-container .button{
+.button-container .memo-button{
   margin: 0 5px;
 }
 </style>

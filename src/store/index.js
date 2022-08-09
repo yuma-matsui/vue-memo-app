@@ -35,7 +35,13 @@ export default createStore({
     },
 
     editMemo (state, index) {
-      state.memos.at(index).editable = true
+      const memo = state.memos.at(index)
+      memo.editable = !memo.editable
+    },
+
+    updateMemo (state, { index, updatedMemo }) {
+      updatedMemo.editable = false
+      state.memos[index] = updatedMemo
     },
 
     deleteMemo (state, index) {
@@ -50,6 +56,11 @@ export default createStore({
 
     editMemo ({ commit }, index) {
       commit('editMemo', index)
+    },
+
+    updateMemo ({ commit }, { index, updatedMemo }) {
+      commit('updateMemo', { index, updatedMemo })
+      commit('saveMemos')
     },
 
     deleteMemo ({ commit }, index) {
