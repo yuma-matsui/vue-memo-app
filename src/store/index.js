@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    memos: JSON.parse(localStorage.getItem('memos')) || []
+    memos: JSON.parse(localStorage.getItem('memos')) || [],
+    id: localStorage.getItem('id') || 0
   },
   getters: {
     hasMemos (state) {
@@ -28,14 +29,21 @@ export default createStore({
     }
   },
   mutations: {
+    incrementId (state) {
+      state.id++
+    },
+
+    saveId (state) {
+      localStorage.setItem('id', state.id)
+    },
+
     createMemo (state, newMemo) {
       if (newMemo.title === '') newMemo.title = 'タイトルなし'
       if (newMemo.description === '') newMemo.description = '詳細なし'
-      state.memos.push(newMemo)
+      state.memos.push({ id: state.id, ...newMemo })
     },
 
     saveMemos (state) {
-      localStorage.clear()
       const memosJSON = JSON.stringify(state.memos)
       localStorage.setItem('memos', memosJSON)
     },
@@ -57,6 +65,11 @@ export default createStore({
     }
   },
   actions: {
+    incrementId ({ commit }) {
+      commit('incrementId')
+      commit('saveId')
+    },
+
     createMemo ({ commit }, newMemo) {
       commit('createMemo', newMemo)
       commit('saveMemos')

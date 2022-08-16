@@ -42,6 +42,7 @@ export default {
 
   methods: {
     createMemo () {
+      this.$store.dispatch('incrementId')
       this.$store.dispatch('createMemo', { ...this.newMemo })
       this.resetNewMemo()
     },
