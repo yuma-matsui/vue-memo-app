@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="editMemo(index)"
+    @click="editMemo(memo)"
     class="memo-button"
   >
     編集
@@ -12,8 +12,8 @@ import { mapActions } from 'vuex'
 export default {
 
   props: {
-    index: {
-      type: String,
+    memo: {
+      type: Object,
       required: true
     }
   },

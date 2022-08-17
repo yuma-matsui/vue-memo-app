@@ -31,10 +31,6 @@ export default {
     memo: {
       type: Object,
       required: true
-    },
-    index: {
-      type: String,
-      required: true
     }
   },
 
@@ -49,7 +45,6 @@ export default {
   methods: {
     updateMemo () {
       this.$store.dispatch('updateMemo', {
-        index: this.index,
         updatedMemo: this.updatedMemo
       })
     }

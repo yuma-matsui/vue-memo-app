@@ -11,8 +11,8 @@ export default createStore({
     },
 
     hasMemo (state) {
-      return (index) => {
-        return state.memos.length > index
+      return (id) => {
+        return state.memos.some(memo => memo.id === id)
       }
     },
 
@@ -23,8 +23,8 @@ export default createStore({
     },
 
     memo (state) {
-      return (index) => {
-        return state.memos.at(index)
+      return (id) => {
+        return state.memos.find(memo => memo.id === id)
       }
     }
   },
@@ -48,19 +48,25 @@ export default createStore({
       localStorage.setItem('memos', memosJSON)
     },
 
-    editMemo (state, index) {
-      const memo = state.memos.at(index)
+    editMemo (_, memo) {
       memo.editable = !memo.editable
     },
 
-    updateMemo (state, { index, updatedMemo }) {
+    updateMemo (state, { updatedMemo }) {
       updatedMemo.editable = false
       if (updatedMemo.title === '') updatedMemo.title = 'タイトルなし'
       if (updatedMemo.description === '') updatedMemo.description = '詳細なし'
-      state.memos[index] = updatedMemo
+
+      state.memos =
+        state.memos.map(memo => {
+          return memo.id === updatedMemo.id
+            ? updatedMemo
+            : memo
+        })
     },
 
-    deleteMemo (state, index) {
+    deleteMemo (state, memo) {
+      const index = state.memos.indexOf(memo)
       state.memos.splice(index, 1)
     }
   },
@@ -75,17 +81,17 @@ export default createStore({
       commit('saveMemos')
     },
 
-    editMemo ({ commit }, index) {
-      commit('editMemo', index)
+    editMemo ({ commit }, memo) {
+      commit('editMemo', memo)
     },
 
-    updateMemo ({ commit }, { index, updatedMemo }) {
-      commit('updateMemo', { index, updatedMemo })
+    updateMemo ({ commit }, { updatedMemo }) {
+      commit('updateMemo', { updatedMemo })
       commit('saveMemos')
     },
 
-    deleteMemo ({ commit }, index) {
-      commit('deleteMemo', index)
+    deleteMemo ({ commit }, memo) {
+      commit('deleteMemo', memo)
       commit('saveMemos')
     }
   }

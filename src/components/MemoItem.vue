@@ -2,7 +2,6 @@
   <template v-if="memo.editable">
     <memo-update-form
       :memo="memo"
-      :index="index"
     />
   </template>
   <template v-else>
@@ -11,8 +10,8 @@
       <p>{{ memo.description }}</p>
     </div>
     <div class="button-container">
-      <memo-edit-button :index="index" />
-      <memo-delete-button :index="index" />
+      <memo-edit-button :memo="memo" />
+      <memo-delete-button :memo="memo" />
     </div>
   </template>
 </template>
@@ -29,15 +28,15 @@ export default {
   },
 
   props: {
-    index: {
-      type: String,
+    id: {
+      type: Number,
       required: true
     }
   },
 
   computed: {
     memo () {
-      return this.$store.getters.memo(this.index)
+      return this.$store.getters.memo(this.id)
     }
   }
 }

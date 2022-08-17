@@ -10,16 +10,20 @@
 <script>
 export default {
   props: {
-    index: {
-      type: String,
+    memo: {
+      type: Object,
       required: true
     }
   },
 
   methods: {
     deleteMemo () {
-      this.$store.dispatch('deleteMemo', this.index)
-      this.$router.push({ name: 'Home' })
+      if (confirm('本当に削除しますか?')) {
+        this.$store.dispatch('deleteMemo', this.memo)
+        this.$router.push({ name: 'Home' })
+      } else {
+        alert('削除を中止しました。')
+      }
     }
   }
 }

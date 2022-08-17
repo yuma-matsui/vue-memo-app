@@ -1,8 +1,8 @@
 <template>
   <memo-app-top-title />
-  <template v-if="hasMemo(index)">
+  <template v-if="hasMemo(id)">
     <memo-item
-      :index="index"
+      :id="id"
     />
   </template>
 </template>
@@ -19,10 +19,9 @@ export default {
     MemoItem
   },
 
-  props: {
-    index: {
-      type: String,
-      required: true
+  data () {
+    return {
+      id: Number(this.$route.params.id)
     }
   },
 
@@ -33,8 +32,8 @@ export default {
   },
 
   beforeRouteEnter (to, _, next) {
-    const index = Number(to.params.index)
-    if (!store.getters.hasMemo(index) || Number.isNaN(index)) {
+    const id = Number(to.params.id)
+    if (!store.getters.hasMemo(id) || Number.isNaN(id)) {
       next({ name: 'Home' })
     } else {
       next()
@@ -42,8 +41,8 @@ export default {
   },
 
   beforeRouteLeave (_, __, next) {
-    const memo = this.$store.getters.memo(this.index)
-    if (memo?.editable) this.$store.dispatch('editMemo', this.index)
+    const memo = this.$store.getters.memo(this.id)
+    if (memo?.editable) this.$store.dispatch('editMemo', memo)
     next()
   }
 }

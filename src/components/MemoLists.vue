@@ -3,10 +3,10 @@
     <div class="memo-lists-container">
       <ul>
         <li
-          v-for="(memo, index) in memos"
+          v-for="memo in memos"
           :key="memo.title"
         >
-          <router-link :to="toMemoDetails(index)">
+          <router-link :to="toMemoDetails(memo.id)">
             {{ memo.title }}
           </router-link>
         </li>
@@ -24,11 +24,11 @@ export default {
     },
 
     toMemoDetails () {
-      return (index) => {
+      return (id) => {
         return {
           name: 'MemoDetails',
           params: {
-            index
+            id
           }
         }
       }
