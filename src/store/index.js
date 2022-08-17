@@ -68,6 +68,11 @@ export default createStore({
     deleteMemo (state, memo) {
       const index = state.memos.indexOf(memo)
       state.memos.splice(index, 1)
+    },
+
+    clearStorage (state) {
+      state.id = 0
+      localStorage.clear()
     }
   },
   actions: {
@@ -93,6 +98,10 @@ export default createStore({
     deleteMemo ({ commit }, memo) {
       commit('deleteMemo', memo)
       commit('saveMemos')
+    },
+
+    clearStorage ({ commit }) {
+      commit('clearStorage')
     }
   }
 })

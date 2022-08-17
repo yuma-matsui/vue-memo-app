@@ -18,6 +18,10 @@ export default {
     MemoAppTopTitle
   },
 
+  created () {
+    if (!this.$store.getters.hasMemos) this.$store.dispatch('clearStorage')
+  },
+
   computed: {
     ...mapGetters([
       'subTitle'
