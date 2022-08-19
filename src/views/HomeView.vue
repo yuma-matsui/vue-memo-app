@@ -1,18 +1,31 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <memo-app-top-title />
+  <h2>{{ subTitle }}</h2>
+  <memo-lists />
+  <memo-create-form />
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapGetters } from 'vuex'
+import MemoCreateForm from '@/components/MemoCreateForm'
+import MemoLists from '@/components/MemoLists'
+import MemoAppTopTitle from '@/components/MemoAppTopTitle'
 
 export default {
-  name: 'HomeView',
   components: {
-    HelloWorld
+    MemoCreateForm,
+    MemoLists,
+    MemoAppTopTitle
+  },
+
+  created () {
+    if (!this.$store.getters.hasMemos) this.$store.dispatch('clearStorage')
+  },
+
+  computed: {
+    ...mapGetters([
+      'subTitle'
+    ])
   }
 }
 </script>
